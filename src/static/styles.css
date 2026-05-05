@@ -66,12 +66,125 @@ section h3 {
 }
 
 .activity-card h4 {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   color: #0066cc;
+  font-size: 1.05rem;
 }
 
 .activity-card p {
   margin-bottom: 8px;
+}
+
+.activity-description {
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.spots {
+  font-size: 0.9rem;
+}
+
+.spots-low strong,
+.spots-low {
+  color: #e65100;
+}
+
+.spots-full strong,
+.spots-full {
+  color: #c62828;
+}
+
+.toggle-participants {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  padding: 5px 10px;
+  background: #e8eaf6;
+  color: #1a237e;
+  border: 1px solid #c5cae9;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.15s;
+  width: 100%;
+  text-align: left;
+}
+
+.toggle-participants:hover {
+  background: #c5cae9;
+}
+
+.toggle-icon {
+  font-size: 0.65rem;
+  transition: transform 0.2s;
+}
+
+.participants-panel {
+  margin-top: 6px;
+  padding: 8px 12px;
+  background: #f3f4fb;
+  border: 1px solid #c5cae9;
+  border-radius: 4px;
+  animation: slideDown 0.15s ease;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.participants-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.participants-list li {
+  padding: 3px 0;
+  font-size: 0.85rem;
+  color: #333;
+  border-bottom: 1px solid #dde;
+}
+
+.participants-list li:last-child {
+  border-bottom: none;
+}
+
+.participant-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.delete-participant {
+  flex-shrink: 0;
+  padding: 1px 6px;
+  font-size: 0.75rem;
+  background: transparent;
+  color: #c62828;
+  border: 1px solid #ef9a9a;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  line-height: 1.4;
+}
+
+.delete-participant:hover {
+  background: #c62828;
+  color: #fff;
+}
+
+.delete-participant:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.no-participants {
+  color: #888;
+  font-style: italic;
 }
 
 .form-group {
