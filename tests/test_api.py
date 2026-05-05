@@ -109,10 +109,10 @@ def test_remove_existing_participant():
 
 
 def test_remove_normalizes_email_case():
-    # Arrange
+    # Arrange — seed a mixed-case email directly to prove normalization works on stored values
     activity_name = "Chess Club"
-    email_input = "MICHAEL@Mergington.EDU"
-    email_stored = "michael@mergington.edu"
+    activities[activity_name]["participants"].append("MixedCase@Mergington.EDU")
+    email_input = "mixedcase@mergington.edu"
 
     # Act
     response = client.delete(
@@ -122,7 +122,7 @@ def test_remove_normalizes_email_case():
 
     # Assert
     assert response.status_code == 200
-    assert email_stored not in activities[activity_name]["participants"]
+    assert "MixedCase@Mergington.EDU" not in activities[activity_name]["participants"]
 
 
 def test_remove_non_participant_returns_404():

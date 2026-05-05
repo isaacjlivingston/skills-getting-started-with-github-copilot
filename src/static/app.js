@@ -36,7 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const spotsParent = card.querySelector(".spots");
         const newSpots = parseInt(spotsEl.textContent, 10) + 1;
         spotsEl.textContent = newSpots;
-        const maxSpots = parseInt(spotsParent.textContent.match(/\/\s*(\d+)/)[1], 10);
         spotsParent.className = newSpots === 0 ? "spots spots-full" : newSpots <= 3 ? "spots spots-low" : "spots";
 
         // Remove the row
@@ -70,6 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const spotsLeft = details.max_participants - details.participants.length;
     const spotsClass = spotsLeft === 0 ? "spots spots-full" : spotsLeft <= 3 ? "spots spots-low" : "spots";
+    card.dataset.maxParticipants = details.max_participants;
 
     card.innerHTML = `
       <h4>${name}</h4>
@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const list = card.querySelector(".participants-list");
 
           const currentSpots = parseInt(spotsEl.textContent, 10);
-          const newSpots = Math.max(0, currentSpots - 1);
+          const newSpots = currentSpots - 1;
           spotsEl.textContent = newSpots;
 
           spotsParent.className = newSpots === 0 ? "spots spots-full" : newSpots <= 3 ? "spots spots-low" : "spots";

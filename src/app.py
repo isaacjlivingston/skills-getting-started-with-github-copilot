@@ -104,6 +104,9 @@ def signup_for_activity(activity_name: str, email: str):
     if normalized_email in existing_emails:
         raise HTTPException(status_code=409, detail="Student is already signed up for this activity")
 
+    if len(activity["participants"]) >= activity["max_participants"]:
+        raise HTTPException(status_code=400, detail="Activity is full")
+
     # Add student
     activity["participants"].append(normalized_email)
     return {"message": f"Signed up {normalized_email} for {activity_name}"}
@@ -118,8 +121,13 @@ def remove_from_activity(activity_name: str, email: str):
     activity = activities[activity_name]
     normalized_email = email.strip().lower()
 
-    if normalized_email not in activity["participants"]:
+    # Normalize stored emails before searching so mixed-case entries are matched correctly
+    stored_email = next(
+        (p for p in activity["participants"] if p.strip().lower() == normalized_email),
+        None,
+    )
+    if stored_email is None:
         raise HTTPException(status_code=404, detail="Student is not signed up for this activity")
 
-    activity["participants"].remove(normalized_email)
+    activity["participants"].remove(stored_email)
     return {"message": f"Removed {normalized_email} from {activity_name}"}
